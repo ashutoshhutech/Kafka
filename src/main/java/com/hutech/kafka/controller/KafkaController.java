@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,20 +19,19 @@ public class KafkaController {
 
 	@Autowired
 	private ProducerService producerService;
-
-	@PostMapping("/send/{userId}")
-	public String sendMessage(@RequestParam("msg")String message,@PathVariable Long userId){
-		return producerService.publishToTopic(message,userId);
+	
+	
+	
+	
+	@PostMapping("/message/{orderId}")
+	public String sendKafkaMessage(@RequestBody Message message, @PathVariable Long orderId) {
+		
+		//Authurization and authentication should be done here.
+		
+		message.setUserName("Ashutosh");
+		message.setOrderId(orderId);
+		return producerService.publishToTopic(message);
 	}
 
-	// @PutMapping("/send/{userId}")
-	// public String sendMessage(@RequestParam("msg")String message,@PathVariable
-	// User user) {
-	// return producerService.publishToTopic(message, user);
-	// }
-/*
-	@PostMapping("/send/{   }")
-	public String sendMessage(@RequestParam("content") String message, @PathVariable User user) {
-		return producerService.publishToTopic(message, user);
-	}*/
+	
 }

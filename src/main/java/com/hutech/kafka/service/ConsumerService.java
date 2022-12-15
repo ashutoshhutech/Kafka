@@ -26,17 +26,12 @@ public class ConsumerService {
 	
 	
 	
-	@KafkaListener(topics = "mytopic", groupId = "mygroup")
-	public void consumeFromTopic(String kafkaMessage,Long userId) {
-		
-		
-		User user=new User();
-		Message message = new Message();
-		message.setUserId(user.getUserId());
-		message.setMessage(kafkaMessage);
-		messageRepository.save(message);
-		
-		
+	
+	@KafkaListener(topics="mytopic",groupId="mygroup")
+	public void consumeFromTopic(String kafkaMessage) {
+		Message msg = new Message();
+	    msg.setMessage(kafkaMessage);
+		messageRepository.save(kafkaMessage);
 	}
 	
 	/*

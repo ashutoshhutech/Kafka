@@ -32,16 +32,8 @@ public class Message {
 	private String userName;
 
 	private Date timestamp;
+	
+	private Long  orderId;
 
-	/*
-	 * public void setMessage(String kafkaMessage) { // TODO Auto-generated method
-	 * stub
-	 * 
-	 * }
-	 */
-
-	public void setUserId(Long userId) {
-
-	}
 
 }

@@ -16,42 +16,19 @@ public class ProducerService {
 
 	@Autowired
 	private UserRepo repo;
-	
+
 	@Autowired
 	private MessageRepository mRepo;
 
 	@Autowired
-	private KafkaTemplate<String, Long > kafkaTemplate;
-	
-	
-	
-	public String publishToTopic(String message,Long userId) {
+	private KafkaTemplate<String,Message > kafkaTemplate;
 
-		User user = repo.findById(userId).get();
-		String userName=user.getUserName();
-		if (userId != null) {
-			
-			//Message msg = new Message ();
-			//msg.setUserName(user.getUserName());
-
-			this.kafkaTemplate.send(topic, message,userId);
-			return "send";
-
+	public String publishToTopic(Message message) {
+	
+		
+			this.kafkaTemplate.send(topic, message);
+			return "Message Sent";
 		}
-		return "Not Send";
-	}
 
-	/*
-	 * public String publishToTopic(String message, User user) {
-	 * 
-	 * //User user = repo.findById(user).get(); //String
-	 * userName=user.getUserName(); if (user != null) {
-	 * 
-	 * Message msg = new Message (); msg.setUserName(user.getUserName());
-	 * 
-	 * this.kafkaTemplate.send(topic, message,user); return "send";
-	 * 
-	 * } return "Not Send"; }
-	 */
 
 }
